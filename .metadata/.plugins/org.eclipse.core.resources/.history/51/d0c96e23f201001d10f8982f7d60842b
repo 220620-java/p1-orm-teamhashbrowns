@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://JAVA.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>p1</display-name>
+
+	<servlet>
+	<!-- telling the web container a servlet that it needs to create -->
+	<servlet-name>Hello</servlet-name>
+	<servlet-mapping>p1.servlets.HelloServlet</servlet-mapping>
+	
+	</servlet>
+	<!-- telling the web container which path should go this servlet -->
+	<servlet-mapping>
+	<servlet-name>Hello</servlet-name>
+	<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+</web-app>

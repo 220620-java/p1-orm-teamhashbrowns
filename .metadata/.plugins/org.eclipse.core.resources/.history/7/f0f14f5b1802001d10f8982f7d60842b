@@ -1,0 +1,67 @@
+package p1.models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cook {
+private String name, username, password;
+private int id;
+private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+
+
+public Cook() {
+	this.name = "Cook";
+	this.username = "cooker10";
+	this.password = "password4";
+	this.id = 1;
+	
+	Recipe recipe1 = new Recipe("Cake", "Fluggy Cake", "Flour, Eggs, Butter", 30),
+		   recipe2 = new Recipe("Hot dogs", "Glorious Glizzys", "Hot dogs, buns", 5);
+	recipes.add(recipe1);
+	recipes.add(recipe2);
+}
+
+public Cook(String name, String username, String password, int id, ArrayList<Recipe> recipes) {
+	this.name = name;
+	this.username = username;
+	this.password = password;
+	this.id = id;
+	this.recipes = recipes;
+}
+
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getUsername() {
+	return username;
+}
+public void setUsername(String username) {
+	this.username = username;
+}
+public String getPassword() {
+	return password;
+}
+public void setPassword(String password) {
+	this.password = password;
+}
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+
+public ArrayList<Recipe> getRecipes() {
+	return recipes;
+}
+
+public void setRecipes(ArrayList<Recipe> recipes) {
+	this.recipes = recipes;
+}
+
+
+
+}

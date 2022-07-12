@@ -1,0 +1,10 @@
+package p1.models;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cook {
+private String name, username, password;
+int id;
+List<Recipe> accounts = new ArrayList<>();
+}

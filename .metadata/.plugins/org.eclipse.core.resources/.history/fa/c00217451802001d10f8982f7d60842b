@@ -1,0 +1,52 @@
+package p1.models;
+
+public class Recipe {
+private String  name, description, ingriedients;
+private int id;
+private double cooktime;
+
+public Recipe() {
+	
+}
+public Recipe(String name, String desc, String ing, double cooktime) {
+	this.name = name;
+	this.description = desc;
+	this.ingriedients = ing;
+	this.cooktime = cooktime;
+}
+
+
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getIngriedients() {
+	return ingriedients;
+}
+public void setIngriedients(String ingriedients) {
+	this.ingriedients = ingriedients;
+}
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
+public String getDescription() {
+	return description;
+}
+public void setDescription(String description) {
+	this.description = description;
+}
+public double getCooktime() {
+	return cooktime;
+}
+public void setCooktime(double cooktime) {
+	this.cooktime = cooktime;
+}
+
+
+
+}
