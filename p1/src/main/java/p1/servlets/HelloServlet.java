@@ -18,41 +18,50 @@ public class HelloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// gets the response body writer object so that we can write to the response
 		// body
-		
+
 		StringBuilder uriString = new StringBuilder(req.getRequestURI()); // /p1/hello/id
-		uriString.replace(0, req.getContextPath().length()+1, "");
-		
+		uriString.replace(0, req.getContextPath().length() + 1, "");
+
 		// if there is a slash
-				if (uriString.indexOf("/") != -1) {
-					uriString.replace(0, uriString.indexOf("/")+1, ""); // 6
-					
-					PrintWriter writer = resp.getWriter();
-					writer.write("Hello! :) Path variable: " + uriString.toString());
-				} else {
-					// gets the response body writer object so that we can write to the response body
-					PrintWriter writer = resp.getWriter();
-					writer.write("Hello! :)");
-				}
+		if (uriString.indexOf("/") != -1) {
+			uriString.replace(0, uriString.indexOf("/") + 1, ""); // 6
+			
+			String path = uriString.toString();
+			
+			if(path.equals("html")) {
+				PrintWriter writer = resp.getWriter();
+				writer.write(html);
+			}else {
+				PrintWriter writer = resp.getWriter();
+				writer.write("Path: " + path);
+			}
+		} else {
+			// gets the response body writer object so that we can write to the response
+			// body
+			PrintWriter writer = resp.getWriter();
+			writer.write("Hello! :)");
+		}
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-String language = req.getParameter("language");
-		
+
+		String language = req.getParameter("language");
+
 		// this gets a reader that will read the HTTP request body
 		BufferedReader reader = req.getReader();
-	
+
 		String requestBody = "";
 		String line = "";
-		while ((line=reader.readLine())!=null) {
+		while ((line = reader.readLine()) != null) {
 			requestBody += line;
 		}
-		
+
 		PrintWriter writer = resp.getWriter();
-		
-		if (language==null) language="";
+
+		if (language == null)
+			language = "";
 		switch (language) {
 		case "en":
 			writer.write("Hello, " + requestBody + "! :)");
@@ -68,5 +77,13 @@ String language = req.getParameter("language");
 		}
 
 	}
-	
+
+	static String html = "<html>" + "<head>" + "<title>AHHH RECIPES</title>" + "<style>" + "body{"
+			+ "background-color: #96bf9e;" + "}" + "</style>" + "</head>" + "<body>"
+			+ "<table width=\"960\" cellpadding=\"12\" cellsapcing=\"5\" border=\"1\" align=\"center\">" + "<tr>"
+			+ "<td bgcolor=\"#96a6bf\" colspan=\"2\" align=\"center\">"
+			+ "<h1>My<font color=\"blue\">Cookbook!</font></h1></td></tr>" + "<tr>"
+			+ "<td bgcolor=\"#bfb096\" width=\"25%\"><h4>Hello</4></td>"
+			+ "<td bgcolor=\"#2196f3\" width=\"75%\"><b>Test test test</b></td>" + "</tr>" + "</table>" + "</body>"
+			+ "</html>";
 }
