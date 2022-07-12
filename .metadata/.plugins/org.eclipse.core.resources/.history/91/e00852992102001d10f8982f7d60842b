@@ -28,7 +28,7 @@ public class HelloServlet extends HttpServlet {
 			
 			String path = uriString.toString();
 			
-			if(path.equals("html")) {
+			if(path.equals("/html")) {
 				PrintWriter writer = resp.getWriter();
 				writer.write(html);
 			}else {
@@ -78,11 +78,11 @@ public class HelloServlet extends HttpServlet {
 
 	}
 
-	static String html = "<html>" + "<head>" + "<title>AHHH RECIPES</title>" + "<style>" + "body{"
+	static String html = "<html>" + "<head>" + "<title>AHHH</title>" + "<style>" + "body{"
 			+ "background-color: #96bf9e;" + "}" + "</style>" + "</head>" + "<body>"
 			+ "<table width=\"960\" cellpadding=\"12\" cellsapcing=\"5\" border=\"1\" align=\"center\">" + "<tr>"
 			+ "<td bgcolor=\"#96a6bf\" colspan=\"2\" align=\"center\">"
-			+ "<h1>My<font color=\"blue\">Cookbook!</font></h1></td></tr>" + "<tr>"
+			+ "<h1>HTML <font color=\"blue\">Test</font></h1></td></tr>" + "<tr>"
 			+ "<td bgcolor=\"#bfb096\" width=\"25%\"><h4>Hello</4></td>"
 			+ "<td bgcolor=\"#2196f3\" width=\"75%\"><b>Test test test</b></td>" + "</tr>" + "</table>" + "</body>"
 			+ "</html>";
