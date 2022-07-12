@@ -1,0 +1,17 @@
+package p1.delegates;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class RequestMapper {
+	//map of the delegates with their url mapping
+	private Map<String, FrontCDelegate> delegateMap;
+	
+	
+	{
+		delegateMap = new HashMap<>();
+		
+		
+	}
+	
+}

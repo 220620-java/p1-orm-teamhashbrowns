@@ -20,10 +20,10 @@ public class CookServlet extends HttpServlet {
 		
 		Cook cook = new Cook();
 		
-		cook.setName("test man");
-		cook.setUsername("test username");
+		cook.setName("Chef Ramsay");
+		cook.setUsername("hellskitchen76");
 		cook.setPassword("secret");
-		cook.setId(1);
+		cook.setId(40);
 		cook.setRecipes(null);
 
 		PrintWriter writer = resp.getWriter();
@@ -37,7 +37,7 @@ public class CookServlet extends HttpServlet {
 
 		Cook exampleCook = objMapper.readValue(req.getInputStream(), Cook.class);
 		
-		System.out.println(exampleCook.getId() + " " + exampleCook.getName() + " " + exampleCook.getUsername() + " " + exampleCook.getPassword() + " " + exampleCook.getRecipes());
+		System.out.println("ID=" + exampleCook.getId() + " NAME=" + exampleCook.getName() + " USER=" + exampleCook.getUsername() + " PASS=" + exampleCook.getPassword() + " RECIPES[]=" + exampleCook.getRecipes());
 		
 		String pretty = objMapper.writerWithDefaultPrettyPrinter().writeValueAsString(exampleCook);
 		System.out.println(pretty);
