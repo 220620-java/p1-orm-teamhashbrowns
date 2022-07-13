@@ -7,52 +7,52 @@ import java.util.stream.Stream;
 
 public class Orm {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		Object cook = new TestModel();
 
+		
 		insertObject("p1.cooks", cook);
-		selectById("p1.cooks", 3, cook);
+		selectById("p1.cooks", cook);
 	}
 	
 	//return sql but sysout for testing
-	public static void insertObject(String table, Object object) {
+	public static void insertObject(String table, Object object) throws Exception, IllegalAccessException {
 		//
-		StringJoiner comma1 = new StringJoiner(",");
-		StringJoiner comma2 = new StringJoiner(",");
-
-		// StringBuilder fieldsStr = new StringBuilder();
-		// StringBuilder inpStr = new StringBuilder();
+		StringJoiner comma1 = new StringJoiner(", ");
+		StringJoiner comma2 = new StringJoiner("', '");
 
 		Class<?> clazz = object.getClass();
 		Field[] fields = clazz.getDeclaredFields();
-		Stream<Field> fieldArray = Arrays.stream(fields);
 
-		// long total = Arrays.stream(fields).count();
-		//
-
-		fieldArray.forEach(field -> {
+		for (Field field : fields) {
+			field.setAccessible(true);
 			comma1.add(field.getName());
-			comma2.add("?");
-			// inpStr.append(" ?, ");
-			// fieldsStr.append(field.getName());
-			// fieldsStr.append(", ");
-		});
+			comma2.add(field.get(object).toString());
+		}
 
-		// fieldsStr.setLength(fieldsStr.length() - 2);
-
-		String sql = "insert into " + table + "(" + comma1.toString() + ") values ( " + comma2.toString() + " )";
+		String sql = "insert into " + table + "(" + comma1.toString() + ") values ( '" + comma2.toString() + "' )";
 
 		System.out.println(sql);
 
 	}
 
-	public static void selectById(String table, int id, Object object) {
-		
+	public static void selectById(String table, Object object) throws Exception, SecurityException {
+		//
 		Class<?> clazz = object.getClass();
-		StringJoiner equal = new StringJoiner(" = ");
-
-		String sql = "select * from " + table + " where id=" + id;
+		Field idField = clazz.getDeclaredField("id");
+		//Field[] fields = clazz.getDeclaredFields();
+		idField.setAccessible(true);
+		//
+     
+		/*
+		for (Field field : fields) {
+			field.setAccessible(true);
+			System.out.println("[" + field.getName().toUpperCase() + "] = " + field.get(object));
+		}
+		 */
+        
+		String sql = "select * from " + table + " where id = " + idField.get(object).toString();
 
 		System.out.println(sql);
 		
