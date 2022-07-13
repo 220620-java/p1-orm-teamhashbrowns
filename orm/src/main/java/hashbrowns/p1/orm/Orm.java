@@ -14,7 +14,8 @@ public class Orm {
 		insertObject("p1.cooks", cook);
 		selectById("p1.cooks", 3, cook);
 	}
-
+	
+	//return sql but sysout for testing
 	public static void insertObject(String table, Object object) {
 		//
 		StringJoiner comma1 = new StringJoiner(",");
