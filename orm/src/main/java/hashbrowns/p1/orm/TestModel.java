@@ -10,10 +10,7 @@ public class TestModel {
 	private ArrayList<?> recipes = new ArrayList<>();
 
 	public TestModel() {
-		this.id = 3;
-		this.name = "Chef Ramsay";
-		this.username = "testuser";
-		this.password = "testpass";
+
 	}
 
 	public int getId() {
