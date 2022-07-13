@@ -2,36 +2,52 @@ package hashbrowns.p1.orm;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public class Orm {
 
 	public static void main(String[] args) {
-		
+
 		Object cook = new TestModel();
 
-		insertObject("Cooks", cook);
+		insertObject("p1.cooks", cook);
 
 	}
 
 	public static void insertObject(String table, Object object) {
 		//
-		StringBuilder fieldsStr = new StringBuilder();
+		StringJoiner comma1 = new StringJoiner(",");
+		StringJoiner comma2 = new StringJoiner(",");
+
+		//StringBuilder fieldsStr = new StringBuilder();
+		//StringBuilder inpStr = new StringBuilder();
+
 		Class<?> clazz = object.getClass();
 		Field[] fields = clazz.getDeclaredFields();
 		Stream<Field> strArray = Arrays.stream(fields);
-		//
-		
-		strArray.forEach(field -> {
-			fieldsStr.append(field.getName());
-			fieldsStr.append(", ");
-		});
-		fieldsStr.setLength(fieldsStr.length() - 2);
 
-		String sql = "insert into " + table + "(" + fieldsStr + ") values ( )";
-		
+		// long total = Arrays.stream(fields).count();
+		//
+
+		strArray.forEach(field -> {
+			comma1.add(field.getName());
+			comma2.add("?");
+			//inpStr.append(" ?, ");
+			//fieldsStr.append(field.getName());
+			//fieldsStr.append(", ");
+		});
+
+		//fieldsStr.setLength(fieldsStr.length() - 2);
+
+		String sql = "insert into " + table + "(" + comma1.toString() + ") values ( " + comma2.toString() + " )";
+
 		System.out.println(sql);
 
+	}
+	
+	public static void selectAll(String table, Object object) {
+		
 	}
 
 }
