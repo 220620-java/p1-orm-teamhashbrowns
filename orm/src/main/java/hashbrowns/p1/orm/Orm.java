@@ -44,13 +44,7 @@ public class Orm {
 		//Field[] fields = clazz.getDeclaredFields();
 		idField.setAccessible(true);
 		//
-     
-		/*
-		for (Field field : fields) {
-			field.setAccessible(true);
-			System.out.println("[" + field.getName().toUpperCase() + "] = " + field.get(object));
-		}
-		 */
+    
         
 		String sql = "select * from " + table + " where id = " + idField.get(object).toString();
 
