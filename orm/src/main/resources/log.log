@@ -2,3 +2,89 @@
 2022-07-13T17:07:47.781454200 --- INFO: User input and example array has been added to the test model
 2022-07-13T17:07:47.811374200 --- INFO: Java object has been displayed as a JSON object
 2022-07-13T17:07:47.813369100 --- INFO: Example query strings have been output
+2022-07-13T20:14:10.305087700 --- INFO: User has entered in test field information
+2022-07-13T20:14:10.307082700 --- INFO: User input and example array has been added to the test model
+2022-07-13T20:14:10.336005100 --- INFO: Java object has been displayed as a JSON object
+2022-07-13T20:14:10.338000200 --- INFO: Example query strings have been output
+2022-07-13T20:38:43.627016400 --- INFO: User has entered in test field information
+2022-07-13T20:38:43.629011200 --- INFO: User input and example array has been added to the test model
+2022-07-13T20:38:43.771630100 --- INFO: Java object has been displayed as a JSON object
+2022-07-13T20:38:43.773625 --- INFO: Example query strings have been output
+2022-07-13T20:46:02.055600500 --- INFO: Test model assigned example field values
+2022-07-13T20:46:02.231131100 --- INFO: Example query strings have been output
+2022-07-13T20:46:42.127439 --- INFO: Test model assigned example field values
+2022-07-13T20:46:42.299977 --- INFO: Example query strings have been output
+2022-07-13T20:47:17.022122100 --- INFO: Test model assigned example field values
+2022-07-13T20:47:17.197652500 --- INFO: Example query strings have been output
+2022-07-13T20:47:26.758589 --- INFO: Test model assigned example field values
+2022-07-13T20:47:26.931127800 --- INFO: Example query strings have been output
+2022-07-13T20:47:37.131849 --- INFO: Test model assigned example field values
+2022-07-13T20:47:37.304387200 --- INFO: Example query strings have been output
+2022-07-13T20:48:09.097868900 --- INFO: Test model assigned example field values
+2022-07-13T20:48:09.273399500 --- INFO: Example query strings have been output
+2022-07-13T20:48:41.762515500 --- INFO: Test model assigned example field values
+2022-07-13T20:48:41.938046300 --- INFO: Example query strings have been output
+2022-07-13T20:48:53.602851500 --- INFO: Test model assigned example field values
+2022-07-13T20:48:53.778382300 --- INFO: Example query strings have been output
+2022-07-13T20:49:36.533799900 --- INFO: Test model assigned example field values
+2022-07-13T20:49:36.709330700 --- INFO: Example query strings have been output
+2022-07-13T20:49:44.854548400 --- INFO: Test model assigned example field values
+2022-07-13T20:49:45.027087400 --- INFO: Example query strings have been output
+2022-07-13T20:50:29.497335100 --- INFO: Test model assigned example field values
+2022-07-13T20:50:29.676855100 --- INFO: Example query strings have been output
+2022-07-13T20:50:37.257582400 --- INFO: Test model assigned example field values
+2022-07-13T20:50:37.430120800 --- INFO: Example query strings have been output
+2022-07-13T20:50:46.685370 --- INFO: Test model assigned example field values
+2022-07-13T20:50:46.857908800 --- INFO: Example query strings have been output
+2022-07-13T20:51:08.397306700 --- INFO: Test model assigned example field values
+2022-07-13T20:56:16.981771600 --- INFO: Test model assigned example field values
+2022-07-13T20:56:16.993739200 --- INFO: Example query strings have been output
+2022-07-13T20:58:31.350082500 --- INFO: Test model assigned example field values
+2022-07-13T20:58:31.363047600 --- INFO: Example query strings have been output
+2022-07-13T20:58:51.717736900 --- INFO: Test model assigned example field values
+2022-07-13T20:58:51.739677900 --- INFO: Example query strings have been output
+2022-07-13T20:59:01.333537700 --- INFO: Test model assigned example field values
+2022-07-13T20:59:01.345506 --- INFO: Example query strings have been output
+2022-07-13T20:59:20.075581 --- INFO: Test model assigned example field values
+2022-07-13T20:59:20.088546100 --- INFO: Example query strings have been output
+2022-07-13T20:59:33.611383100 --- INFO: Test model assigned example field values
+2022-07-13T20:59:33.624348100 --- INFO: Example query strings have been output
+2022-07-13T21:00:00.308988200 --- INFO: Test model assigned example field values
+2022-07-13T21:00:00.322950300 --- INFO: Example query strings have been output
+2022-07-13T21:00:15.945751100 --- INFO: Test model assigned example field values
+2022-07-13T21:00:15.957719100 --- INFO: Example query strings have been output
+2022-07-13T21:00:26.515485 --- INFO: Test model assigned example field values
+2022-07-13T21:00:26.527453100 --- INFO: Example query strings have been output
+2022-07-13T21:00:45.017671300 --- INFO: Test model assigned example field values
+2022-07-13T21:00:45.029639300 --- INFO: Example query strings have been output
+2022-07-13T21:01:04.522510400 --- INFO: Test model assigned example field values
+2022-07-13T21:01:04.535475600 --- INFO: Example query strings have been output
+2022-07-13T21:01:40.599042600 --- INFO: Test model assigned example field values
+2022-07-13T21:01:40.611010500 --- INFO: Example query strings have been output
+2022-07-13T21:01:52.530135700 --- INFO: Test model assigned example field values
+2022-07-13T21:01:52.543101200 --- INFO: Example query strings have been output
+2022-07-13T21:01:57.544766800 --- INFO: Test model assigned example field values
+2022-07-13T21:02:04.224902800 --- INFO: Test model assigned example field values
+2022-07-13T21:02:04.236870300 --- INFO: Example query strings have been output
+2022-07-13T21:02:32.242976200 --- INFO: Test model assigned example field values
+2022-07-13T21:02:32.255940800 --- INFO: Example query strings have been output
+2022-07-13T21:03:13.787874 --- INFO: Test model assigned example field values
+2022-07-13T21:03:13.798844400 --- INFO: Example query strings have been output
+2022-07-13T21:04:05.873765700 --- INFO: Test model assigned example field values
+2022-07-13T21:04:05.884735700 --- INFO: Example query strings have been output
+2022-07-13T21:04:14.649297600 --- INFO: Test model assigned example field values
+2022-07-13T21:04:14.662262600 --- INFO: Example query strings have been output
+2022-07-13T21:04:46.677645200 --- INFO: Test model assigned example field values
+2022-07-13T21:04:46.691608200 --- INFO: Example query strings have been output
+2022-07-13T21:05:07.071133600 --- INFO: Test model assigned example field values
+2022-07-13T21:05:07.083101500 --- INFO: Example query strings have been output
+2022-07-13T21:05:18.730460300 --- INFO: Test model assigned example field values
+2022-07-13T21:05:18.742428300 --- INFO: Example query strings have been output
+2022-07-13T21:05:45.904327400 --- INFO: Test model assigned example field values
+2022-07-13T21:05:45.918290 --- INFO: Example query strings have been output
+2022-07-13T21:05:57.695806300 --- INFO: Test model assigned example field values
+2022-07-13T21:05:57.709768800 --- INFO: Example query strings have been output
+2022-07-13T21:06:47.400892700 --- INFO: Test model assigned example field values
+2022-07-13T21:06:47.413858100 --- INFO: Example query strings have been output
+2022-07-13T21:08:18.761729800 --- INFO: Test model assigned example field values
+2022-07-13T21:08:18.774694900 --- INFO: Example query strings have been output
