@@ -30,9 +30,8 @@ public class QueryBuilder implements Mapper {
 
 		//
 		strArray.forEach(field -> {
-
+			
 			field.setAccessible(true);
-
 			try {
 				if (!field.get(object).equals(null) & !field.isAnnotationPresent(ignore.class) & !field.isAnnotationPresent(id.class)) {
 
@@ -45,7 +44,6 @@ public class QueryBuilder implements Mapper {
 			} catch (Exception e) {
 				logger.log("Nulled fields are being excluded from the statement", LoggingLevel.INFO);
 			}
-			
 		});
 
 		//
@@ -68,7 +66,6 @@ public class QueryBuilder implements Mapper {
 		//
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(id.class)) {
-				
 				field.setAccessible(true);
 				id = field.getName().toString();
 				idValue = field.get(object).toString();
