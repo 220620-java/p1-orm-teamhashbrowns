@@ -16,7 +16,7 @@ public class TestModel {
 	private ArrayList<?> recipes = new ArrayList<>();
 
 	public TestModel() {
-		this.id = 8;
+		
 	}
 
 	public int getId() {
