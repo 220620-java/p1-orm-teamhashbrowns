@@ -47,7 +47,7 @@ public class QueryBuilder implements Mapper {
 		});
 
 		//
-		String query = "insert into " + table + "(" + comma1.toString() + ") values ('" + comma2.toString() + "')";
+		String query = "INSERT INTO " + table + "(" + comma1.toString() + ") VALUES ('" + comma2.toString() + "')";
 
 		postgres.insertSQL(query);
 		return query;
@@ -75,7 +75,7 @@ public class QueryBuilder implements Mapper {
 		}
 
 		//
-		String query = "select * from " + table + " where " + id + " = " + idValue;
+		String query = "SELECT * FROM " + table + " WHERE " + id + " = " + idValue;
 
 		postgres.selectSQL(query);
 		return query;
@@ -132,8 +132,28 @@ public class QueryBuilder implements Mapper {
 	
 	@Override
 	public Object deleteQuery(String table, Object object) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		//
+		Class<?> clazz = object.getClass();
+		Field[] fields = clazz.getDeclaredFields();
+		String id = null;
+		String idValue = null;
+
+		//
+		for (Field field : fields) {
+			if (field.isAnnotationPresent(id.class)) {
+				
+				field.setAccessible(true);
+				id = field.getName().toString();
+				idValue = field.get(object).toString();
+				
+			}
+		}
+		
+		//
+		String sql = "DELETE FROM "+table+" WHERE "+id+"='"+idValue+"';";
+		
+		postgres.deleteSQL(sql);
+		return sql;
 	}
 
 }
