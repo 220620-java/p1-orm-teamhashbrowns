@@ -4,7 +4,7 @@ public interface PostgresDao {
 
 	public Object insertSQL(String sql, Object object);
 	
-	public Object selectSQL(String sql, Object object);
+	public Object selectSQL(String sql, Object object) throws IllegalArgumentException, IllegalAccessException;
 	
 	public Object updateSQL(String sql, Object object);
 	

@@ -25,7 +25,7 @@ public class Main {
 		String json = ow.writeValueAsString(cook2);
 		
 		System.out.println(json);
-		
+		System.out.println(cook2);
 		//cook.setName("Chef Tony");
 		//cook.setUsername("tonyw");
 		//cook.setPassword("newpassword");
