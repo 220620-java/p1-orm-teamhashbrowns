@@ -51,7 +51,7 @@ public class QueryBuilder implements Mapper {
 		//
 		String query = "INSERT INTO " + table + "(" + comma1.toString() + ") VALUES ('" + comma2.toString() + "')";
 
-		postgres.insertSQL(query);
+		postgres.insertSQL(query, object);
 		return query;
 	}
 
@@ -77,10 +77,10 @@ public class QueryBuilder implements Mapper {
 		}
 
 		//
-		String query = "SELECT * FROM " + table + " WHERE " + id + " = " + idValue;
+		String query = "SELECT * FROM " + table + " WHERE " + id + " = '" + idValue +"'";
 
-		postgres.selectSQL(query);
-		return query;
+		postgres.selectSQL(query, object);
+		return object;
 	}
 
 	
@@ -126,7 +126,8 @@ public class QueryBuilder implements Mapper {
 		String query = "UPDATE " + table + " SET " + fieldStr.toString() + " where "+id+"='"
 				+ idValue + "'";
 
-		postgres.updateSQL(query);
+		
+		postgres.updateSQL(query, object);
 		return query;
 	}
 
@@ -154,7 +155,7 @@ public class QueryBuilder implements Mapper {
 		//
 		String sql = "DELETE FROM "+table+" WHERE "+id+"='"+idValue+"';";
 		
-		postgres.deleteSQL(sql);
+		postgres.deleteSQL(sql, object);
 		return sql;
 	}
 

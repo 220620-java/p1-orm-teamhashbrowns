@@ -1,17 +1,28 @@
 package hashbrowns.p1.orm.data;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
+import hashbrowns.p1.orm.annotations.id;
+import hashbrowns.p1.orm.annotations.ignore;
 import hashbrowns.p1.orm.utils.ConnectDB;
+import hashbrowns.p1.orm.utils.LoggingLevel;
 
 public class Postgres implements PostgresDao {
 
 	private ConnectDB connUtil = ConnectDB.getConnectionDB();
 
 	@Override
-	public void insertSQL(String sql) {
+	public Object insertSQL(String sql, Object object) {
 
 		try (Connection conn = connUtil.getConnection()) {
 
@@ -24,18 +35,57 @@ public class Postgres implements PostgresDao {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		return object;
 
 	}
 
 	@Override
-	public String selectSQL(String sql) {
-		// TODO Auto-generated method stub
-		System.out.println(sql);
-		return null;
+	public Object selectSQL(String sql, Object object) {
+		try (Connection conn = connUtil.getConnection()) {
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet resultSet = stmt.executeQuery();
+
+			if (resultSet.next()) {
+				Class<?> clazz = object.getClass();
+				Field[] fields = clazz.getDeclaredFields();
+				Stream<Field> strArray = Arrays.stream(fields);
+
+				strArray.forEach(field -> {
+
+					field.setAccessible(true);
+					try {
+
+						if (!field.isAnnotationPresent(ignore.class) & !field.isAnnotationPresent(id.class)) {
+
+							Map<String, String> map = new HashMap<>();
+							map.put(field.getName(), resultSet.getString(field.getName()));
+
+							for (String i : map.keySet()) {
+								System.out.println(i + " - " + map.get(i));
+								field.set(object, map.get(i));
+							}
+						}
+					} catch (Exception e) {
+						// e.printStackTrace();
+					}
+
+				});
+
+			} else {
+				System.out.println("null object");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return object;
 	}
 
 	@Override
-	public void updateSQL(String sql) {
+	public Object updateSQL(String sql, Object object) {
 
 		try (Connection conn = connUtil.getConnection()) {
 			conn.setAutoCommit(false);
@@ -49,11 +99,12 @@ public class Postgres implements PostgresDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return object;
 
 	}
 
 	@Override
-	public void deleteSQL(String sql) {
+	public Object deleteSQL(String sql, Object object) {
 		try (Connection conn = connUtil.getConnection()) {
 			conn.setAutoCommit(false);
 
@@ -66,6 +117,7 @@ public class Postgres implements PostgresDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return object;
 	}
 
 }

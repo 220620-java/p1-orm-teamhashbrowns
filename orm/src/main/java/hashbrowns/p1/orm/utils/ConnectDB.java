@@ -11,10 +11,13 @@ public class ConnectDB {
 
 	private static ConnectDB connDB;
 	private Properties connectParams;
+
+	static final String endpoint = "jdbc:postgresql://bankapp.cwhrhowdulyu.us-east-1.rds.amazonaws.com:5432/postgres",
+			username = "postgres", password = "Q!w2e3r4t5";
 	
 
 	private ConnectDB() {
-
+		/*
 		connectParams = new Properties();
 
 		InputStream propsFile = ConnectDB.class.getClassLoader().getResourceAsStream("config.properties");
@@ -23,7 +26,7 @@ public class ConnectDB {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 
 	};
 
@@ -39,22 +42,19 @@ public class ConnectDB {
 	public Connection getConnection() {
 
 		Connection conn = null;
-
+		
+		/*
 		String endpoint = connectParams.getProperty("db.url");
 		String username = connectParams.getProperty("db.user");
 		String password = connectParams.getProperty("db.password");
-
+		 */
 		//
 		try {
 			Class.forName("org.postgresql.Driver");
-			conn = DriverManager.getConnection(
-					endpoint,
-					username,
-					password);
+			conn = DriverManager.getConnection(endpoint, username, password);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 
 		return conn;
 	}
