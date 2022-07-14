@@ -50,7 +50,7 @@ public class QueryBuilder implements Mapper {
 		String query = "INSERT INTO " + table + "(" + comma1.toString() + ") VALUES ('" + comma2.toString() + "')";
 
 		postgres.insertSQL(query, object);
-		return query;
+		return object;
 	}
 
 	
@@ -125,7 +125,7 @@ public class QueryBuilder implements Mapper {
 
 		
 		postgres.updateSQL(query, object);
-		return query;
+		return object;
 	}
 
 	
@@ -153,7 +153,7 @@ public class QueryBuilder implements Mapper {
 		String sql = "DELETE FROM "+table+" WHERE "+id+"='"+idValue+"';";
 		
 		postgres.deleteSQL(sql, object);
-		return sql;
+		return object;
 	}
 
 }

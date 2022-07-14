@@ -17,25 +17,27 @@ public class Main {
 		
 		
 		
-		Object cook = new TestModel();
+		TestModel cook = new TestModel();
+		//cook.setName("Chef Mike");
+		//cook.setUsername("mikey24");
+		//cook.setPassword("SuperSecret");
+		cook.setId(10);
+		
+		Object returnObj  = orm.selectByIdQuery("recipe.cook", cook);
 
-		Object cook2  = orm.selectByIdQuery("recipe.cook", cook);
-
+		
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-		String json = ow.writeValueAsString(cook2);
+		String json = ow.writeValueAsString(returnObj);
 		
 		System.out.println(json);
-		System.out.println(cook2);
-		//cook.setName("Chef Tony");
-		//cook.setUsername("tonyw");
-		//cook.setPassword("newpassword");
-		//cook.setRecipes(someRecipes);
+		
+		
 		
 		logger.log("Test model assigned example field values", LoggingLevel.INFO);
 		
 		//Test some queries	
 		//orm.insertQuery("recipe.cook", cook);
-		
+		//orm.selectByIdQuery("recipe.cook", cook);
 		//orm.updateQuery("recipe.cook", cook);
 		//orm.deleteQuery("recipe.cook", cook);
 		logger.log("Example query strings have been output", LoggingLevel.INFO);

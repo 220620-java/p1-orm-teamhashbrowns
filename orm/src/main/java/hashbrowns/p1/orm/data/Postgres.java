@@ -22,9 +22,6 @@ public class Postgres implements PostgresDao {
 
 	private ConnectDB connUtil = ConnectDB.getConnectionDB();
 
-	
-	
-	
 	@Override
 	public Object insertSQL(String sql, Object object) {
 
@@ -43,8 +40,6 @@ public class Postgres implements PostgresDao {
 
 	}
 
-	
-	
 	@Override
 	public Object selectSQL(String sql, Object object) throws IllegalArgumentException, IllegalAccessException {
 		try (Connection conn = connUtil.getConnection()) {
@@ -56,7 +51,6 @@ public class Postgres implements PostgresDao {
 			int columns = md.getColumnCount();
 			Map<String, Object> row = new HashMap<String, Object>();
 
-			
 			//
 			while (resultSet.next()) {
 
@@ -64,16 +58,23 @@ public class Postgres implements PostgresDao {
 				for (int i = 1; i <= columns; i++) {
 					row.put(md.getColumnLabel(i), resultSet.getObject(i));
 				}
-				
+
 				//
 				row.entrySet().stream().forEach(e -> {
-					
+
 					for (Field field : fields) {
 						field.setAccessible(true);
 						try {
-							if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && !field.isAnnotationPresent(id.class)) {
+							
+							if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("String")) {
 								field.set(object, e.getValue().toString());
-							}
+							} else if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("int")) {
+								field.setInt(object, (int) e.getValue());
+							} else if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("double")) {
+								field.setDouble(object, (double) e.getValue());
+							} else if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("boolean")) {
+								field.setBoolean(object, (boolean) e.getValue());
+							} 
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -90,8 +91,6 @@ public class Postgres implements PostgresDao {
 		return object;
 	}
 
-	
-	
 	@Override
 	public Object updateSQL(String sql, Object object) {
 
@@ -111,8 +110,6 @@ public class Postgres implements PostgresDao {
 
 	}
 
-	
-	
 	@Override
 	public Object deleteSQL(String sql, Object object) {
 		try (Connection conn = connUtil.getConnection()) {
