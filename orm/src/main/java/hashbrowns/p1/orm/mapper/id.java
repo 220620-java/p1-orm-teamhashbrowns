@@ -1,4 +1,4 @@
-package hashbrowns.p1.orm.data;
+package hashbrowns.p1.orm.mapper;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

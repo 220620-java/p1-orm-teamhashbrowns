@@ -2,7 +2,8 @@ package hashbrowns.p1.orm;
 
 import java.util.ArrayList;
 
-import hashbrowns.p1.orm.data.id;
+import hashbrowns.p1.orm.mapper.id;
+import hashbrowns.p1.orm.mapper.ignore;
 
 public class TestModel {
 	
@@ -12,6 +13,7 @@ public class TestModel {
 	private String name;
 	private String username;
 	private String password;
+	@ignore
 	private ArrayList<?> recipes = new ArrayList<>();
 
 	public TestModel() {
