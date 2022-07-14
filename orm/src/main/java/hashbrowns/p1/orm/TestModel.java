@@ -2,8 +2,8 @@ package hashbrowns.p1.orm;
 
 import java.util.ArrayList;
 
-import hashbrowns.p1.orm.mapper.id;
-import hashbrowns.p1.orm.mapper.ignore;
+import hashbrowns.p1.orm.annotations.id;
+import hashbrowns.p1.orm.annotations.ignore;
 
 public class TestModel {
 	
