@@ -48,7 +48,6 @@ public class ConnectDB {
 		try {
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(
-					// jdbc:postgresql://pet-app.cziwys5p2mwa.us-east-2.rds.amazonaws.com:5432/postgres?currentSchema=pet_app0
 					endpoint,
 					username,
 					password);
