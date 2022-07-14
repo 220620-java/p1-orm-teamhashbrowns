@@ -41,53 +41,60 @@ public class Postgres implements PostgresDao {
 	}
 
 	@Override
-	public Object selectSQL(String sql, Object object) throws IllegalArgumentException, IllegalAccessException {
+	public Object selectSQL(String sql, Object object) {
 		try (Connection conn = connUtil.getConnection()) {
-
 			Field[] fields = object.getClass().getDeclaredFields();
+			Map<String, Object> row = new HashMap<String, Object>();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet resultSet = stmt.executeQuery();
-			ResultSetMetaData md = resultSet.getMetaData();
-			int columns = md.getColumnCount();
-			Map<String, Object> row = new HashMap<String, Object>();
-
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			int columns = metaData.getColumnCount();	
 			//
+			
 			while (resultSet.next()) {
-
-				//
-				for (int i = 1; i <= columns; i++) {
-					row.put(md.getColumnLabel(i), resultSet.getObject(i));
-				}
-
+				for (int i = 1; i <= columns; i++) {row.put(metaData.getColumnLabel(i), resultSet.getObject(i));}
+				
 				//
 				row.entrySet().stream().forEach(e -> {
 
 					for (Field field : fields) {
 						field.setAccessible(true);
 						try {
-							
-							if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("String")) {
+							if (field.getName().equals(e.getKey()) 
+									&& !field.isAnnotationPresent(ignore.class) 
+									&& field.getType().getSimpleName().equals("String")) {
+								
 								field.set(object, e.getValue().toString());
-							} else if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("int")) {
+								
+							} else if (field.getName().equals(e.getKey()) 
+									&& !field.isAnnotationPresent(ignore.class) 
+									&& field.getType().getSimpleName().equals("int")) {
+								
 								field.setInt(object, (int) e.getValue());
-							} else if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("double")) {
+								
+							} else if (field.getName().equals(e.getKey()) 
+									&& !field.isAnnotationPresent(ignore.class) 
+									&& field.getType().getSimpleName().equals("double")) {
+								
 								field.setDouble(object, (double) e.getValue());
-							} else if (field.getName().equals(e.getKey()) && !field.isAnnotationPresent(ignore.class) && field.getType().getSimpleName().equals("boolean")) {
-								field.setBoolean(object, (boolean) e.getValue());
-							} 
+								
+							} else if (field.getName().equals(e.getKey()) 
+									&& !field.isAnnotationPresent(ignore.class) 
+									&& field.getType().getSimpleName().equals("boolean")) {
+								
+								field.setBoolean(object, (boolean) e.getValue());		
+								
+							} 			
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
-						}
-					}
-					;
-
-				});
+							
+						} } });
 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return object;
 	}
 
