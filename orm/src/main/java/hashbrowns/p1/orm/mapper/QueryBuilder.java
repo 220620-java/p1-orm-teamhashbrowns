@@ -1,5 +1,6 @@
 package hashbrowns.p1.orm.mapper;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.StringJoiner;
@@ -8,6 +9,7 @@ import hashbrowns.p1.orm.utils.Logger;
 import hashbrowns.p1.orm.utils.LoggingLevel;
 
 import hashbrowns.p1.orm.data.Postgres;
+import hashbrowns.p1.orm.data.id;
 
 public class QueryBuilder implements Mapper {
 	private static Logger logger = Logger.getLogger();
@@ -46,13 +48,22 @@ public class QueryBuilder implements Mapper {
 
 	public Object selectByIdQuery(String table, Object object) throws Exception {
 		//
+		StringBuilder fieldStr = new StringBuilder();
 		Class<?> clazz = object.getClass();
-		Field idField = clazz.getDeclaredField("id");
-		idField.setAccessible(true);
+		Field[] fields = clazz.getDeclaredFields();
+		String id = null;
+		String idValue = null;
 		//
+		for (Field field : fields) {
+			if (field.isAnnotationPresent(id.class)) {
+				field.setAccessible(true);
+				id = field.getName().toString();
+				idValue = field.get(object).toString();
+			}
+		}
 
 		// this might just be a int param for id rather then the current objects?
-		String query = "select * from " + table + " where id = " + idField.get(object).toString();
+		String query = "select * from " + table + " where " + id + " = " + idValue;
 
 		postgres.selectSQL(query);
 		return query;

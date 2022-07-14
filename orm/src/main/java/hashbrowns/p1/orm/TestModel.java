@@ -2,8 +2,13 @@ package hashbrowns.p1.orm;
 
 import java.util.ArrayList;
 
+import hashbrowns.p1.orm.data.id;
+
 public class TestModel {
+	
+	@id
 	private int id;
+	//
 	private String name;
 	private String username;
 	private String password;
