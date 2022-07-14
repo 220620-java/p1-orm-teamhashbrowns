@@ -33,6 +33,7 @@ public class Main {
 		orm.insertQuery("recipe.cook", cook);
 		orm.selectByIdQuery("recipe.cook", cook);
 		orm.updateQuery("recipe.cook", cook);
+		orm.deleteQuery("recipe.cook", cook);
 		logger.log("Example query strings have been output", LoggingLevel.INFO);
 	}
 
