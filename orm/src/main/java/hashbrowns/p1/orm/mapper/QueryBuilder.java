@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 import java.util.stream.Stream;
 
-public class QueryBuilder {
+import hashbrowns.p1.orm.data.Postgres;
 
-	public Object insertObject(String table, Object object) {
+public class QueryBuilder implements Mapper {
+	static Postgres postgres = new Postgres();
+	
+	public Object insertQuery(String table, Object object) {
 		//
 		StringJoiner comma1 = new StringJoiner(", ");
 		StringJoiner comma2 = new StringJoiner("', '");
@@ -21,7 +24,7 @@ public class QueryBuilder {
 			field.setAccessible(true);
 
 			try {
-				if (!field.get(object).equals(null)) {
+				if (!field.get(object).equals(null) & !field.getType().getSimpleName().equals("ArrayList")) {
 					comma1.add(field.getName());
 					comma2.add(field.get(object).toString());
 				}
@@ -37,13 +40,15 @@ public class QueryBuilder {
 		 * comma1.add(field.getName()); comma2.add(field.get(object).toString()); }
 		 */
 
-		String query = "insert into " + table + "(" + comma1.toString() + ") values ( '" + comma2.toString() + "' )";
-
+		String query = "insert into " + table + "(" + comma1.toString() + ") values ('" + comma2.toString() + "')";
+		
+		postgres.insertSQL(query);
+		
 		return query;
 
 	}
 
-	public Object selectById(String table, Object object) throws Exception {
+	public Object selectByIdQuery(String table, Object object) throws Exception {
 		//
 		Class<?> clazz = object.getClass();
 		Field idField = clazz.getDeclaredField("id");
@@ -53,11 +58,12 @@ public class QueryBuilder {
 		// this might just be a int param for id rather then the current objects?
 		String query = "select * from " + table + " where id = " + idField.get(object).toString();
 
+		postgres.selectSQL(query);
 		return query;
 
 	}
 
-	public Object update(String table, Object object) throws Exception {
+	public Object updateQuery(String table, Object object) throws Exception {
 		//
 		StringBuilder fieldStr = new StringBuilder();
 		Class<?> clazz = object.getClass();
@@ -73,13 +79,13 @@ public class QueryBuilder {
 			
 			try {
 				field.setAccessible(true);
-				if (!field.get(object).equals(null)) {
+				if (!field.get(object).equals(null) & !field.getName().equals("id") & !field.getType().getSimpleName().equals("ArrayList")) {
 					fieldStr.append(field.getName());
 					fieldStr.append("='");
 					fieldStr.append(field.get(object));
 					fieldStr.append("', ");
 				}
-
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				//its ok
@@ -96,10 +102,17 @@ public class QueryBuilder {
 
 		fieldStr.setLength(fieldStr.length() - 2);
 
-		String query = "UPDATE " + table + " SET " + fieldStr.toString() + " where id ='"
+		String query = "UPDATE " + table + " SET " + fieldStr.toString() + " where id='"
 				+ idField.get(object).toString() + "'";
 
+		postgres.updateSQL(query);
 		return query;
+	}
+
+	@Override
+	public Object deleteQuery(String table, Object object) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
