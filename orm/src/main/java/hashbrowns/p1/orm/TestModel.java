@@ -6,7 +6,7 @@ import hashbrowns.p1.orm.annotations.id;
 import hashbrowns.p1.orm.annotations.ignore;
 
 public class TestModel {
-	
+
 	@id
 	private int id;
 	private String name;
@@ -16,7 +16,7 @@ public class TestModel {
 	private ArrayList<?> recipes = new ArrayList<>();
 
 	public TestModel() {
-
+		this.id = 8;
 	}
 
 	public int getId() {

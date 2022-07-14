@@ -2,12 +2,12 @@ package hashbrowns.p1.orm.data;
 
 public interface PostgresDao {
 
-	public void insertSQL(String sql);
+	public Object insertSQL(String sql, Object object);
 	
-	public String selectSQL(String sql);
+	public Object selectSQL(String sql, Object object);
 	
-	public void updateSQL(String sql);
+	public Object updateSQL(String sql, Object object);
 	
-	public void deleteSQL(String sql);
+	public Object deleteSQL(String sql, Object object);
 	
 }
