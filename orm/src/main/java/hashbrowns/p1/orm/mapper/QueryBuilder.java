@@ -4,10 +4,13 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.StringJoiner;
 import java.util.stream.Stream;
+import hashbrowns.p1.orm.utils.Logger;
+import hashbrowns.p1.orm.utils.LoggingLevel;
 
 import hashbrowns.p1.orm.data.Postgres;
 
 public class QueryBuilder implements Mapper {
+	private static Logger logger = Logger.getLogger();
 	static Postgres postgres = new Postgres();
 	
 	public Object insertQuery(String table, Object object) {
@@ -31,7 +34,7 @@ public class QueryBuilder implements Mapper {
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				//its ok
+				logger.log("Nulled fields are being excluded from the statement", LoggingLevel.INFO);
 			}
 		});
 
@@ -87,18 +90,9 @@ public class QueryBuilder implements Mapper {
 				}
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				//its ok
+				logger.log("Nulled fields are being excluded from the statement", LoggingLevel.INFO);
 			}
 		});
-
-		/*
-		 * for (Field field : fields) { field.setAccessible(true);
-		 * 
-		 * if (!field.getName().toString().equals("id")) {
-		 * fieldStr.append(field.getName()); fieldStr.append("='");
-		 * fieldStr.append(field.get(object)); fieldStr.append("', "); } }
-		 */
 
 		fieldStr.setLength(fieldStr.length() - 2);
 
