@@ -22,18 +22,18 @@ public class Main {
 		someRecipes.add("Hot Dogs");
 		someRecipes.add("Cheesesteaks");
 
-		cook.setId(3);
-		cook.setName("Chef Tyler");
-		cook.setUsername("cheftee");
-		cook.setPassword("password123");
+		cook.setId(6);
+		cook.setName("Chef Tony");
+		cook.setUsername("tonyw");
+		cook.setPassword("newpassword");
 		cook.setRecipes(someRecipes);
 		logger.log("Test model assigned example field values", LoggingLevel.INFO);
 		
 		//Test some queries	
-		orm.insertQuery("recipe.cook", cook);
-		orm.selectByIdQuery("recipe.cook", cook);
-		orm.updateQuery("recipe.cook", cook);
-		orm.deleteQuery("recipe.cook", cook);
+		//orm.insertQuery("recipe.cook", cook);
+		//orm.selectByIdQuery("recipe.cook", cook);
+		//orm.updateQuery("recipe.cook", cook);
+		//orm.deleteQuery("recipe.cook", cook);
 		logger.log("Example query strings have been output", LoggingLevel.INFO);
 	}
 

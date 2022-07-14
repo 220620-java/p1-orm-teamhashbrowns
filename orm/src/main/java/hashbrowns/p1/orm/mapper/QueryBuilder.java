@@ -34,11 +34,13 @@ public class QueryBuilder implements Mapper {
 			field.setAccessible(true);
 
 			try {
-				if (!field.get(object).equals(null) & !field.isAnnotationPresent(ignore.class)) {
-					
+				if (!field.get(object).equals(null) & !field.isAnnotationPresent(ignore.class) & !field.isAnnotationPresent(id.class)) {
+
 					comma1.add(field.getName());
 					comma2.add(field.get(object).toString());
-			
+					
+				} else if(field.isAnnotationPresent(id.class)) {
+
 				}
 			} catch (Exception e) {
 				logger.log("Nulled fields are being excluded from the statement", LoggingLevel.INFO);
