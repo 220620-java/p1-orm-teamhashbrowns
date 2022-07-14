@@ -12,7 +12,7 @@ import hashbrowns.p1.orm.data.Postgres;
 public class QueryBuilder implements Mapper {
 	private static Logger logger = Logger.getLogger();
 	static Postgres postgres = new Postgres();
-	
+
 	public Object insertQuery(String table, Object object) {
 		//
 		StringJoiner comma1 = new StringJoiner(", ");
@@ -33,20 +33,13 @@ public class QueryBuilder implements Mapper {
 				}
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				logger.log("Nulled fields are being excluded from the statement", LoggingLevel.INFO);
 			}
 		});
 
-		/*
-		 * for (Field field : fields) { field.setAccessible(true);
-		 * comma1.add(field.getName()); comma2.add(field.get(object).toString()); }
-		 */
-
 		String query = "insert into " + table + "(" + comma1.toString() + ") values ('" + comma2.toString() + "')";
-		
+
 		postgres.insertSQL(query);
-		
 		return query;
 
 	}
@@ -79,16 +72,17 @@ public class QueryBuilder implements Mapper {
 		Stream<Field> strArray = Arrays.stream(fields);
 
 		strArray.forEach(field -> {
-			
+
 			try {
 				field.setAccessible(true);
-				if (!field.get(object).equals(null) & !field.getName().equals("id") & !field.getType().getSimpleName().equals("ArrayList")) {
+				if (!field.get(object).equals(null) & !field.getName().equals("id")
+						& !field.getType().getSimpleName().equals("ArrayList")) {
 					fieldStr.append(field.getName());
 					fieldStr.append("='");
 					fieldStr.append(field.get(object));
 					fieldStr.append("', ");
 				}
-				
+
 			} catch (Exception e) {
 				logger.log("Nulled fields are being excluded from the statement", LoggingLevel.INFO);
 			}
