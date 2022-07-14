@@ -21,6 +21,9 @@ public class Postgres implements PostgresDao {
 
 	private ConnectDB connUtil = ConnectDB.getConnectionDB();
 
+	
+	
+	
 	@Override
 	public Object insertSQL(String sql, Object object) {
 
@@ -39,28 +42,29 @@ public class Postgres implements PostgresDao {
 
 	}
 
+	
+	
 	@Override
 	public Object selectSQL(String sql, Object object) {
 		try (Connection conn = connUtil.getConnection()) {
 
+			Class<?> clazz = object.getClass();
+			Field[] fields = clazz.getDeclaredFields();
+			Stream<Field> strArray = Arrays.stream(fields);
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet resultSet = stmt.executeQuery();
-
+			Map<String, String> map = new HashMap<>();
+			//
 			if (resultSet.next()) {
-				Class<?> clazz = object.getClass();
-				Field[] fields = clazz.getDeclaredFields();
-				Stream<Field> strArray = Arrays.stream(fields);
 
+				//
 				strArray.forEach(field -> {
-
 					field.setAccessible(true);
 					try {
 
 						if (!field.isAnnotationPresent(ignore.class) & !field.isAnnotationPresent(id.class)) {
-
-							Map<String, String> map = new HashMap<>();
+							
 							map.put(field.getName(), resultSet.getString(field.getName()));
-
 							for (String i : map.keySet()) {
 								System.out.println(i + " - " + map.get(i));
 								field.set(object, map.get(i));
@@ -72,18 +76,15 @@ public class Postgres implements PostgresDao {
 
 				});
 
-			} else {
-				System.out.println("null object");
-
-			}
-
+			} 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return object;
 	}
 
+	
+	
 	@Override
 	public Object updateSQL(String sql, Object object) {
 
@@ -103,6 +104,8 @@ public class Postgres implements PostgresDao {
 
 	}
 
+	
+	
 	@Override
 	public Object deleteSQL(String sql, Object object) {
 		try (Connection conn = connUtil.getConnection()) {
