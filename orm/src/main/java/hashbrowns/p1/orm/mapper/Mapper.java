@@ -6,7 +6,7 @@ public interface Mapper {
 
 	public Object selectByIdQuery(String table, Object object) throws Exception;
 
-	public Object updateQuery(String table, Object object) throws Exception;
+	public void updateQuery(String table, Object object) throws Exception;
 
 	public Object deleteQuery(String table, Object object) throws Exception;
 }

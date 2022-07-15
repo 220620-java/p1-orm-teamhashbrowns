@@ -10,19 +10,17 @@ import hashbrowns.p1.orm.annotations.id;
 import hashbrowns.p1.orm.annotations.ignore;
 import hashbrowns.p1.orm.data.Postgres;
 
-public class QueryBuilder implements Mapper {
+public class Orm implements Mapper {
 	//
 	private static Logger logger = Logger.getLogger();
 	static Postgres postgres = new Postgres();
-	
-	
-	
+
 	@Override
 	public Object insertQuery(String table, Object object) {
 		//
 		StringJoiner comma1 = new StringJoiner(", ");
 		StringJoiner comma2 = new StringJoiner("', '");
-		
+
 		//
 		Class<?> clazz = object.getClass();
 		Field[] fields = clazz.getDeclaredFields();
@@ -30,15 +28,16 @@ public class QueryBuilder implements Mapper {
 
 		//
 		strArray.forEach(field -> {
-			
+
 			field.setAccessible(true);
 			try {
-				if (!field.get(object).equals(null) & !field.isAnnotationPresent(ignore.class) & !field.isAnnotationPresent(id.class)) {
+				if (!field.get(object).equals(null) & !field.isAnnotationPresent(ignore.class)
+						& !field.isAnnotationPresent(id.class)) {
 
 					comma1.add(field.getName());
 					comma2.add(field.get(object).toString());
-					
-				} else if(field.isAnnotationPresent(id.class)) {
+
+				} else if (field.isAnnotationPresent(id.class)) {
 
 				}
 			} catch (Exception e) {
@@ -53,8 +52,6 @@ public class QueryBuilder implements Mapper {
 		return object;
 	}
 
-	
-	
 	@Override
 	public Object selectByIdQuery(String table, Object object) throws Exception {
 		//
@@ -62,74 +59,67 @@ public class QueryBuilder implements Mapper {
 		Field[] fields = clazz.getDeclaredFields();
 		String id = null;
 		String idValue = null;
-		
+
 		//
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(id.class)) {
 				field.setAccessible(true);
 				id = field.getName().toString();
 				idValue = field.get(object).toString();
-				
+
 			}
 		}
 
 		//
-		String query = "SELECT * FROM " + table + " WHERE " + id + " = '" + idValue +"'";
+		String query = "SELECT * FROM " + table + " WHERE " + id + " = '" + idValue + "'";
 
 		postgres.selectSQL(query, object);
 		return object;
 	}
 
-	
-	
 	@Override
-	public Object updateQuery(String table, Object object) throws Exception {
+	public void updateQuery(String table, Object object) throws Exception {
 		//
 		StringBuilder fieldStr = new StringBuilder();
-		
+
 		Class<?> clazz = object.getClass();
 		Field[] fields = clazz.getDeclaredFields();
-		
+
 		//
 		String id = null;
 		String idValue = null;
 
 		//
 		for (Field field : fields) {
-			
 			field.setAccessible(true);
-			
-				if (!field.get(object).equals(null) & !field.isAnnotationPresent(id.class)
-						& !field.isAnnotationPresent(ignore.class)) {
-					
-					fieldStr.append(field.getName());
-					fieldStr.append("='");
-					fieldStr.append(field.get(object));
-					fieldStr.append("', ");
-					
-				}else if (field.isAnnotationPresent(id.class)) {
-					
-					field.setAccessible(true);
-					id = field.getName().toString();
-					idValue = field.get(object).toString();
-					
-				}
 
-		};
-		
+			if (!field.isAnnotationPresent(id.class) && !field.isAnnotationPresent(ignore.class) && (field.get(object) != null)) {
+				
+
+				fieldStr.append(field.getName());
+				fieldStr.append("='");
+				fieldStr.append(field.get(object));
+				fieldStr.append("', ");
+
+			} else if (field.isAnnotationPresent(id.class)) {
+
+				field.setAccessible(true);
+				id = field.getName().toString();
+				idValue = field.get(object).toString();
+
+			}
+
+		}
+		;
+
 		fieldStr.setLength(fieldStr.length() - 2);
 
 		//
-		String query = "UPDATE " + table + " SET " + fieldStr.toString() + " where "+id+"='"
-				+ idValue + "'";
-
-		
+		String query = "UPDATE " + table + " SET " + fieldStr.toString() + " where " + id + "=" + idValue + "";
 		postgres.updateSQL(query, object);
-		return object;
+		//return object;
 	}
 
-	
-	
 	@Override
 	public Object deleteQuery(String table, Object object) throws Exception {
 		//
@@ -141,17 +131,17 @@ public class QueryBuilder implements Mapper {
 		//
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(id.class)) {
-				
+
 				field.setAccessible(true);
 				id = field.getName().toString();
 				idValue = field.get(object).toString();
-				
+
 			}
 		}
-		
+
 		//
-		String sql = "DELETE FROM "+table+" WHERE "+id+"='"+idValue+"';";
-		
+		String sql = "DELETE FROM " + table + " WHERE " + id + "='" + idValue + "';";
+
 		postgres.deleteSQL(sql, object);
 		return object;
 	}
