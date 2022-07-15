@@ -1,7 +1,5 @@
 package hashbrowns.p1.orm;
 
-import java.util.ArrayList;
-
 import hashbrowns.p1.orm.annotations.id;
 import hashbrowns.p1.orm.annotations.ignore;
 
