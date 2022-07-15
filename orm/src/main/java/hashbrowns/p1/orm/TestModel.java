@@ -10,53 +10,98 @@ public class TestModel {
 	@id
 	private int id;
 	private String name;
-	private String username;
-	private String password;
-	@ignore
-	private ArrayList<?> recipes = new ArrayList<>();
+	private String position;
+	private String debut;
+	private Double average;
+	private int homeruns;
+	private int rbi;
+	private boolean active;
+
 
 	public TestModel() {
 		
 	}
 
+
 	public int getId() {
 		return id;
 	}
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public ArrayList<?> getRecipes() {
-		return recipes;
+
+	public String getPosition() {
+		return position;
 	}
 
-	public void setRecipes(ArrayList<?> recipes) {
-		this.recipes = recipes;
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
-	public String getUsername() {
-		return username;
+
+	public String getDebut() {
+		return debut;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setDebut(String debut) {
+		this.debut = debut;
 	}
 
-	public String getPassword() {
-		return password;
+
+	public Double getAverage() {
+		return average;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setAverage(Double average) {
+		this.average = average;
 	}
+
+
+	public int getHomeruns() {
+		return homeruns;
+	}
+
+
+	public void setHomeruns(int homeruns) {
+		this.homeruns = homeruns;
+	}
+
+
+	public int getRbi() {
+		return rbi;
+	}
+
+
+	public void setRbi(int rbi) {
+		this.rbi = rbi;
+	}
+
+
+	public boolean isActive() {
+		return active;
+	}
+
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	
 
 }

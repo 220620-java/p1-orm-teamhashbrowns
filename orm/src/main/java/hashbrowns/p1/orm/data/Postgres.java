@@ -50,13 +50,16 @@ public class Postgres implements PostgresDao {
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int columns = metaData.getColumnCount();	
 			//
-			
+			System.out.println(sql);
 			while (resultSet.next()) {
-				for (int i = 1; i <= columns; i++) {row.put(metaData.getColumnLabel(i), resultSet.getObject(i));}
+				for (int i = 1; i <= columns; i++) {
+					
+					row.put(metaData.getColumnLabel(i), resultSet.getObject(i));
+					}
 				
 				//
 				row.entrySet().stream().forEach(e -> {
-
+					
 					for (Field field : fields) {
 						field.setAccessible(true);
 						try {
@@ -74,9 +77,11 @@ public class Postgres implements PostgresDao {
 								
 							} else if (field.getName().equals(e.getKey()) 
 									&& !field.isAnnotationPresent(ignore.class) 
-									&& field.getType().getSimpleName().equals("double")) {
+									&& field.getType().getSimpleName().equals("Double")) {
 								
-								field.setDouble(object, (double) e.getValue());
+								double d = Double.parseDouble((String) e.getValue());
+								
+								field.set(object, d);
 								
 							} else if (field.getName().equals(e.getKey()) 
 									&& !field.isAnnotationPresent(ignore.class) 
@@ -84,7 +89,9 @@ public class Postgres implements PostgresDao {
 								
 								field.setBoolean(object, (boolean) e.getValue());		
 								
-							} 			
+							} else {
+								
+							}			
 						} catch (Exception e1) {
 							e1.printStackTrace();
 							

@@ -78,7 +78,7 @@ public class Orm implements Mapper {
 	}
 
 	@Override
-	public void updateQuery(String table, Object object) throws Exception {
+	public Object updateQuery(String table, Object object) throws Exception {
 		//
 		StringBuilder fieldStr = new StringBuilder();
 
@@ -117,7 +117,7 @@ public class Orm implements Mapper {
 		//
 		String query = "UPDATE " + table + " SET " + fieldStr.toString() + " where " + id + "=" + idValue + "";
 		postgres.updateSQL(query, object);
-		//return object;
+		return object;
 	}
 
 	@Override
