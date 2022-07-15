@@ -18,12 +18,16 @@ public class ObjectTesting {
 		
 		
 		TestModel testObj = new TestModel();
-		//testObj.setName("Mr. Man");
-		testObj.setUsername("mrtony");
-		//testObj.setPassword("SuperSecret2");
-		testObj.setId(12);
+		//testObj.setName("Tony Wiedman");
+		//testObj.setPosition("3B/SS");
+		//testObj.setDebut("04/10/2022");
+		//testObj.setAverage(0.348);
+		//testObj.setHomeruns(47);
+		//testObj.setRbi(115);
+		//testObj.setActive(false);
+		testObj.setId(2);
 		
-		Object returnObj  = orm.selectByIdQuery("recipe.cook", testObj);
+		Object returnObj  = orm.selectByIdQuery("players.player", testObj);
 
 		
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
