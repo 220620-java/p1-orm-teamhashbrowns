@@ -100,19 +100,19 @@ public class Postgres implements PostgresDao {
 
 	@Override
 	public Object updateSQL(String sql, Object object) {
-
 		try (Connection conn = connUtil.getConnection()) {
-			conn.setAutoCommit(false);
+
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.executeUpdate();
 			System.out.println(sql);
-			conn.commit();
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return object;
 
 	}

@@ -7,23 +7,23 @@ import hashbrowns.p1.orm.mapper.*;
 import hashbrowns.p1.orm.utils.Logger;
 import hashbrowns.p1.orm.utils.LoggingLevel;
 
-public class Main {
+public class ObjectTesting {
 	private static Logger logger = Logger.getLogger();
 	
 	public static void main(String[] args) throws Exception {
 		
 		// Instantiate the ORM and Test Model
-		QueryBuilder orm = new QueryBuilder();
+		Orm orm = new Orm();
 		
 		
 		
-		TestModel cook = new TestModel();
-		//cook.setName("Chef Mike");
-		//cook.setUsername("mikey24");
-		//cook.setPassword("SuperSecret");
-		cook.setId(10);
+		TestModel testObj = new TestModel();
+		//testObj.setName("Mr. Man");
+		testObj.setUsername("mrtony");
+		//testObj.setPassword("SuperSecret2");
+		testObj.setId(12);
 		
-		Object returnObj  = orm.selectByIdQuery("recipe.cook", cook);
+		Object returnObj  = orm.selectByIdQuery("recipe.cook", testObj);
 
 		
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
@@ -36,10 +36,10 @@ public class Main {
 		logger.log("Test model assigned example field values", LoggingLevel.INFO);
 		
 		//Test some queries	
-		//orm.insertQuery("recipe.cook", cook);
-		//orm.selectByIdQuery("recipe.cook", cook);
-		//orm.updateQuery("recipe.cook", cook);
-		//orm.deleteQuery("recipe.cook", cook);
+		//orm.insertQuery("recipe.cook", testObj);
+		//orm.selectByIdQuery("recipe.cook", testObj);
+		//orm.updateQuery("recipe.cook", testObj);
+		//orm.deleteQuery("recipe.cook", testObj);
 		logger.log("Example query strings have been output", LoggingLevel.INFO);
 	}
 
