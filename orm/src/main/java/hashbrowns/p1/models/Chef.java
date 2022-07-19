@@ -12,6 +12,11 @@ public class Chef {
 
 	public Chef() {
 	}
+	
+	public Chef(int id) {
+		super();
+		this.id = id;
+	}
 
 	public Chef(String name, String username, String password) {
 		super();
