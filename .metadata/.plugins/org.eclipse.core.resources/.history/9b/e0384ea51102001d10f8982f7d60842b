@@ -1,7 +1,0 @@
-package p1.models;
-
-public class Cook {
-private String name, username, password;
-int id;
-List<Recipe> accounts = new ArrayList<>();
-}
